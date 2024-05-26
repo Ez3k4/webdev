@@ -1,0 +1,98 @@
+:root{
+    --scrTop: 0;
+    --pushDown: 0;
+}
+
+body {
+    margin: 0;
+}
+
+.main{
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-bottom: 10em;
+    padding-top: 10em;
+    width: 100vw;
+    background-color: lightblue;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100vw;
+}
+
+.special{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.startpoint {
+    position: relative;
+}
+
+#liposome{
+    max-width: 80%;
+    min-width: 30%;
+}
+
+#plasmid{
+    position: absolute;
+    width: 20%;
+    height: auto;
+    animation: plasmidMoving infinite 5s linear;
+}
+
+div {
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+}
+
+.horizontal_path {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    /*background-color: lawngreen;*/
+    width: 100vw;	
+    height: 10%;
+    margin: 1em;
+}
+
+.vertical_path {
+    display: flex;
+    /*background-color: lawngreen;*/
+    max-width: 50%;
+    min-width: 20%;	
+    height: 100%;
+    margin: 1em;
+}
+
+.anchor {
+    display: flex;
+    background-color: red;
+    width: 10px;	
+    height: 10px;
+    margin: 1em;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100vw;
+    height: 10%;
+    background-color: lightblue;
+    padding-bottom: 5em;
+}
+

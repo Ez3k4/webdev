@@ -1,0 +1,9 @@
+scroll-driven animations: 
+https://drafts.csswg.org/scroll-animations-1/ , https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_scroll-driven_animations 
+--> unclear if compatible with all browsers yet
+
+--> no canvas
+--> access img properties directly over DOM
+--> keyframes
+
+
