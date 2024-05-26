@@ -1,30 +1,51 @@
+// write hover over html function to log xy pos of mouse cursor
+
 
 const plasmid = document.getElementById("plasmid");
-const rect = plasmid.getBoundingClientRect();
+let rect_plasmid = plasmid.getBoundingClientRect();
+const start_div = document.querySelector(".startpoint");
+let rect_start_div = start_div.getBoundingClientRect();
 
-const anchors = document.querySelectorAll(".anchor");
-let anchorPositions = [];
+console.log("Plasmid x:", rect_plasmid.x, "Plasmid y:", rect_plasmid.y);
+console.log("Start Div x:", rect_start_div.x, "Start Div y:", rect_start_div.y);
+const start_x = rect_start_div.width/2 - rect_plasmid.width/2;
+const start_y = rect_start_div.height/2 -rect_plasmid.height/2;
+console.log("Start X: " + start_x, "Start Y: " + start_y)
 
-anchors.forEach(anchor => {
-    const rect = anchor.getBoundingClientRect();
-    anchorPositions.push({
-        top: rect.top,
-        right: rect.right,
-        bottom: rect.bottom,
-        left: rect.left
-    });
-});
+// gets each element with the id and returns the positions of it in an array of ClientRect objects
+function get_class_positions(class_name) {
+    const positions = [];
+    const elements = document.querySelectorAll(class_name);
+    for (var i = 0; i < elements.length; i++) {
+        var element_position = elements[i].getBoundingClientRect();
+        positions.push(element_position);
+    }
+    return positions;
+}
+const class_DOMrect = get_class_positions(".anchor")
+console.log(class_DOMrect)
 
-console.log(anchorPositions);
-
-console.log("Top:", rect.top, "Right:", rect.right, "Bottom:", rect.bottom, "Left:", rect.left);
+// calculates the coordinates needed to draw object centered in relation to its parent div (=> startpoint div)
+// this could be solved different
+function get_element_center(elements, object) {
+    const elements_xy = []
+    for (var i = 0; i < elements.length; i++) {
+        var element_x = (elements[i].x + elements[i].width / 2 - object.width / 2) - rect_start_div.x;
+        var element_y = (elements[i].y + elements[i].height / 2 - object.height / 2) - rect_start_div.y;
+        elements_xy.push({x: element_x, y: element_y});
+    }
+    return elements_xy
+}
+const centered_coordinates = get_element_center(class_DOMrect, plasmid)
+console.log(centered_coordinates)
 
 const plasmidMoving = [
-    { top: `${rect.top}px`, left: `${rect.left}px`, offset: 0},
-    { top: "125px", left: "57px", offset: 0.25},
-    { top: "250px", left: "114px", offset: 0.5},
-    { top: "250px", left: "407px", offset: 0.75},
-    { top: "250px", left: "700px", offset: 1},
+    { top: `${start_y}px`, left: `${start_x}px`, offset: 0},
+    { top:  `${centered_coordinates[0].y}px`, left: `${start_x}px`, offset: 0.2},
+    { top: `${centered_coordinates[0].y}px`, left: `${centered_coordinates[1].x}px`, offset: 0.4},
+    { top: `${centered_coordinates[2].y}px`, left: `${centered_coordinates[1].x}px`, offset: 0.6},
+    { top: `${centered_coordinates[2].y}px`, left: `${centered_coordinates[3].x}px`, offset: 0.8},
+    { top: `${centered_coordinates[3].y}px`, left: `${centered_coordinates[3].x}px`, offset: 1},
 ];
 
 const myScrollTimeline = new ScrollTimeline({
@@ -43,3 +64,7 @@ const plasmidTiming = {
 
 document.getElementById("plasmid").animate(plasmidMoving, plasmidTiming);
 
+window.addEventListener("scroll", () => {
+    rect = plasmid.getBoundingClientRect();
+    console.log("Plasmid x:", rect.x, "Plasmid y:", rect.y);
+});
