@@ -1,3 +1,7 @@
+// polyfill
+// import 'https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js';
+
+
 // write hover over html function to log xy pos of mouse cursor
 
 
@@ -37,15 +41,34 @@ function get_element_center(elements, object) {
     return elements_xy
 }
 const centered_coordinates = get_element_center(class_DOMrect, plasmid)
+console.log("centered coordinates")
 console.log(centered_coordinates)
 
 const plasmidMoving = [
-    { top: `${start_y}px`, left: `${start_x}px`, offset: 0},
-    { top:  `${centered_coordinates[0].y}px`, left: `${start_x}px`, offset: 0.2},
-    { top: `${centered_coordinates[0].y}px`, left: `${centered_coordinates[1].x}px`, offset: 0.4},
-    { top: `${centered_coordinates[2].y}px`, left: `${centered_coordinates[1].x}px`, offset: 0.6},
-    { top: `${centered_coordinates[2].y}px`, left: `${centered_coordinates[3].x}px`, offset: 0.8},
-    { top: `${centered_coordinates[3].y}px`, left: `${centered_coordinates[3].x}px`, offset: 1},
+    { 
+        top: `${start_y}px`, 
+        left: `${start_x}px`, offset: 0.2},
+    { 
+        top: `${centered_coordinates[0].y}px`, 
+        left: `${start_x}px`, offset: 0.3,
+        transform: 'scale(1)'},
+    { 
+        top: `${centered_coordinates[0].y}px`, 
+        left: `${centered_coordinates[0].x}px`, offset: 0.4,
+        transform: 'scale(4)'},
+    { 
+        top: `${centered_coordinates[0].y}px`, 
+        left: `${centered_coordinates[1].x}px`, offset: 0.5,
+        transform: 'scale(1)'},
+    { 
+        top: `${centered_coordinates[2].y}px`, 
+        left: `${centered_coordinates[1].x}px`, offset: 0.7},
+    { 
+        top: `${centered_coordinates[2].y}px`, 
+        left: `${centered_coordinates[3].x}px`, offset: 0.9},
+    { 
+        top: `${centered_coordinates[3].y}px`, 
+        left: `${centered_coordinates[3].x}px`, offset: 1},
 ];
 
 const myScrollTimeline = new ScrollTimeline({
